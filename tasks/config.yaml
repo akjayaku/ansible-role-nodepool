@@ -21,6 +21,7 @@
     state: directory
   with_items:
     - /etc/nodepool
+    - /etc/nodepool/ssl
     - /opt/nodepool/images
     - /opt/nodepool/tmp
     - /var/log/nodepool
@@ -66,3 +67,33 @@
     src: "{{ nodepool_file_launcher_logging_conf_src }}"
   register: nodepool_file_launcher_logging_conf
   when: nodepool_file_launcher_logging_conf_manage
+
+- name: Install zookeeper tls cacert configuration
+  become: true
+  template:
+    dest: "{{ nodepool_file_zookeeper_tls_cacert_dest }}"
+    group: "{{ nodepool_file_zookeeper_tls_cacert_group }}"
+    mode: "{{ nodepool_file_zookeeper_tls_cacert_mode }}"
+    owner: "{{ nodepool_file_zookeeper_tls_cacert_owner }}"
+    src: "{{ nodepool_file_zookeeper_tls_cacert_src }}"
+  register: nodepool_file_zookeeper_tls_cacert
+
+- name: Install nodepool zookeeper tls cert configuration
+  become: true
+  template:
+    dest: "{{ nodepool_file_zookeeper_tls_cert_dest }}"
+    group: "{{ nodepool_file_zookeeper_tls_cert_group }}"
+    mode: "{{ nodepool_file_zookeeper_tls_cert_mode }}"
+    owner: "{{ nodepool_file_zookeeper_tls_cert_owner }}"
+    src: "{{ nodepool_file_zookeeper_tls_cert_src }}"
+  register: nodepool_file_zookeeper_tls_cert
+
+- name: Install zookeeper tls key configuration
+  become: true
+  template:
+    dest: "{{ nodepool_file_zookeeper_tls_key_dest }}"
+    group: "{{ nodepool_file_zookeeper_tls_key_group }}"
+    mode: "{{ nodepool_file_zookeeper_tls_key_mode }}"
+    owner: "{{ nodepool_file_zookeeper_tls_key_owner }}"
+    src: "{{ nodepool_file_zookeeper_tls_key_src }}"
+  register: nodepool_file_zookeeper_tls_key

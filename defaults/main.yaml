@@ -52,6 +52,27 @@ nodepool_file_launcher_logging_conf_mode: 0644
 nodepool_file_launcher_logging_conf_owner: "{{ nodepool_user_name }}"
 nodepool_file_launcher_logging_conf_src: etc/nodepool/launcher-logging.conf
 
+nodepool_file_zookeeper_tls_cacert_content:
+nodepool_file_zookeeper_tls_cacert_dest: /etc/nodepool/ssl/zookeeper-cacert.pem
+nodepool_file_zookeeper_tls_cacert_group: "{{ nodepool_user_group }}"
+nodepool_file_zookeeper_tls_cacert_mode: 0644
+nodepool_file_zookeeper_tls_cacert_owner: "{{ nodepool_user_name }}"
+nodepool_file_zookeeper_tls_cacert_src: etc/nodepool/ssl/zookeeper-cacert.pem
+
+nodepool_file_zookeeper_tls_cert_content:
+nodepool_file_zookeeper_tls_cert_dest: /etc/nodepool/ssl/zookeeper-client.pem
+nodepool_file_zookeeper_tls_cert_group: "{{ nodepool_user_group }}"
+nodepool_file_zookeeper_tls_cert_mode: 0644
+nodepool_file_zookeeper_tls_cert_owner: "{{ nodepool_user_name }}"
+nodepool_file_zookeeper_tls_cert_src: etc/nodepool/ssl/zookeeper-client.pem
+
+nodepool_file_zookeeper_tls_key_content:
+nodepool_file_zookeeper_tls_key_dest: /etc/nodepool/ssl/zookeeper-client.key
+nodepool_file_zookeeper_tls_key_group: "{{ nodepool_user_group }}"
+nodepool_file_zookeeper_tls_key_mode: 0600
+nodepool_file_zookeeper_tls_key_owner: "{{ nodepool_user_name }}"
+nodepool_file_zookeeper_tls_key_src: etc/nodepool/ssl/zookeeper-client.key
+
 # tasks/install.yaml
 nodepool_git_dest: "{{ ansible_user_dir }}/src/opendev.org/zuul/nodepool"
 nodepool_git_uri: https://opendev.org/zuul/nodepool

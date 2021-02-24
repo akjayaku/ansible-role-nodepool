@@ -46,3 +46,45 @@
           - nodepool_git_dest_stat.stat.exists
           - nodepool_git_dest_stat.stat.isdir
       when: nodepool_install_method == 'git'
+
+    - name: Register /etc/nodepool/ssl/zookeeper-cacert.pem
+      stat:
+        path: /etc/nodepool/ssl/zookeeper-cacert.pem
+      register: _nodepool_file_zookeeper_tls_cacert_stat
+
+    - name: Assert _nodepool_file_zookeeper_tls_cacert_stat tests.
+      assert:
+        that:
+          - _nodepool_file_zookeeper_tls_cacert_stat.stat.exists
+          - _nodepool_file_zookeeper_tls_cacert_stat.stat.isreg
+          - _nodepool_file_zookeeper_tls_cacert_stat.stat.pw_name == 'nodepool'
+          - _nodepool_file_zookeeper_tls_cacert_stat.stat.gr_name == 'nodepool'
+          - _nodepool_file_zookeeper_tls_cacert_stat.stat.mode == '0644'
+
+    - name: Register /etc/nodepool/ssl/zookeeper-client.pem
+      stat:
+        path: /etc/nodepool/ssl/zookeeper-client.pem
+      register: _nodepool_file_zookeeper_tls_cert_stat
+
+    - name: Assert _nodepool_file_zookeeper_tls_cert_stat tests.
+      assert:
+        that:
+          - _nodepool_file_zookeeper_tls_cert_stat.stat.exists
+          - _nodepool_file_zookeeper_tls_cert_stat.stat.isreg
+          - _nodepool_file_zookeeper_tls_cert_stat.stat.pw_name == 'nodepool'
+          - _nodepool_file_zookeeper_tls_cert_stat.stat.gr_name == 'nodepool'
+          - _nodepool_file_zookeeper_tls_cert_stat.stat.mode == '0644'
+
+    - name: Register /etc/nodepool/ssl/zookeeper-client.key
+      stat:
+        path: /etc/nodepool/ssl/zookeeper-client.key
+      register: _nodepool_file_zookeeper_tls_key_stat
+
+    - name: Assert _nodepool_file_zookeeper_tls_key_stat tests.
+      assert:
+        that:
+          - _nodepool_file_zookeeper_tls_key_stat.stat.exists
+          - _nodepool_file_zookeeper_tls_key_stat.stat.isreg
+          - _nodepool_file_zookeeper_tls_key_stat.stat.pw_name == 'nodepool'
+          - _nodepool_file_zookeeper_tls_key_stat.stat.gr_name == 'nodepool'
+          - _nodepool_file_zookeeper_tls_key_stat.stat.mode == '0600'
