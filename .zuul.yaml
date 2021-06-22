@@ -15,14 +15,11 @@
     parent: ansible-role-nodepool-base
 
 - job:
-    name: ansible-role-nodepool-fedora-latest
-    parent: ansible-role-nodepool
-    nodeset: fedora-latest
-
-- job:
     name: ansible-role-nodepool-ubuntu-bionic
     parent: ansible-role-nodepool
     nodeset: ubuntu-bionic
+    vars:
+      nodepool_pip_version: 3.14.0
 
 # Testing for nodepool_install_method: git
 - job:
@@ -33,11 +30,6 @@
     vars:
       nodepool_git_update: false
       nodepool_install_method: git
-
-- job:
-    name: ansible-role-nodepool-src-fedora-latest
-    parent: ansible-role-nodepool-src
-    nodeset: fedora-latest
 
 - job:
     name: ansible-role-nodepool-src-ubuntu-bionic
@@ -56,19 +48,14 @@
 
 - project:
     templates:
-      - windmill-jobs-fedora-latest
       - windmill-jobs-bionic
     check:
       jobs:
-        - ansible-role-nodepool-fedora-latest
         - ansible-role-nodepool-ubuntu-bionic
-        - ansible-role-nodepool-src-fedora-latest
-        - ansible-role-nodepool-src-ubuntu-bionic
+        - ansible-role-nodepool-src-ubuntu-bionic:
+            voting: false
         - tox-linters
     gate:
       jobs:
-        - ansible-role-nodepool-fedora-latest
         - ansible-role-nodepool-ubuntu-bionic
-        - ansible-role-nodepool-src-fedora-latest
-        - ansible-role-nodepool-src-ubuntu-bionic
         - tox-linters

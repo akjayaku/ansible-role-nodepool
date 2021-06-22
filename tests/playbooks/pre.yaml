@@ -20,6 +20,16 @@
       vars:
         bindep_profile: ansible test
 
+    - name: Setup ensure-tox role
+      include_role:
+        name: ensure-tox
+      vars:
+        ensure_global_symlinks: true
+
+    - name: Use the latest version of pip
+      become: true
+      shell: python3 -m pip install -U pip
+
     - name: Execute test-setup role
       include_role:
         name: test-setup
